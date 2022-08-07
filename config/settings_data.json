@@ -127,12 +127,12 @@
     "search_to_display": 5,
     "align_height": true,
     "collection_height": 400,
-    "thumbnail_hover_enabled": false,
+    "thumbnail_hover_enabled": true,
     "display_vendor": false,
     "collection_secondary_image": false,
     "sale_banner_enabled": false,
     "collection_swatches": false,
-    "mobile_products_per_row": "2",
+    "mobile_products_per_row": "1",
     "pagination_type": "basic_pagination",
     "notify_me_form": true,
     "notify_me_richtext": "<p>Notify me when this product is available:<\/p>",
@@ -2065,15 +2065,45 @@
           "custom_css": ""
         }
       },
-      "165987240925457bca": {
-        "type": "featured-collection",
+      "16598724823385fac4": {
+        "type": "collection-list",
+        "blocks": {
+          "16598724823385fac4-0": {
+            "type": "collection",
+            "settings": {
+              "feature_collection": ""
+            }
+          },
+          "16598724823385fac4-1": {
+            "type": "collection",
+            "settings": {
+              "feature_collection": ""
+            }
+          },
+          "16598724823385fac4-2": {
+            "type": "collection",
+            "settings": {
+              "feature_collection": ""
+            }
+          },
+          "7e782bbe-d791-4661-a53f-d3a3c6ed5974": {
+            "type": "collection",
+            "settings": {
+              "feature_collection": ""
+            }
+          }
+        },
+        "block_order": [
+          "16598724823385fac4-0",
+          "16598724823385fac4-1",
+          "16598724823385fac4-2",
+          "7e782bbe-d791-4661-a53f-d3a3c6ed5974"
+        ],
         "settings": {
-          "title": "Featured collection",
-          "collection_description": true,
-          "collection": "",
-          "collection_style": "grid",
-          "products_per": 2,
-          "products_limit": 4,
+          "title": "Collection list",
+          "align_height": true,
+          "collection_height": 300,
+          "frontpage_collections_per_row": 2,
           "css_class": "",
           "custom_css": ""
         }
@@ -2082,7 +2112,7 @@
     "content_for_index": [
       "1489125525070",
       "16239170677cd56038",
-      "165987240925457bca"
+      "16598724823385fac4"
     ]
   }
 }
