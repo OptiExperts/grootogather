@@ -2064,11 +2064,25 @@
           "css_class": "",
           "custom_css": ""
         }
+      },
+      "165987240925457bca": {
+        "type": "featured-collection",
+        "settings": {
+          "title": "Featured collection",
+          "collection_description": true,
+          "collection": "",
+          "collection_style": "grid",
+          "products_per": 2,
+          "products_limit": 4,
+          "css_class": "",
+          "custom_css": ""
+        }
       }
     },
     "content_for_index": [
       "1489125525070",
-      "16239170677cd56038"
+      "16239170677cd56038",
+      "165987240925457bca"
     ]
   }
 }
