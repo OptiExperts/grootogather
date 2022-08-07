@@ -1795,24 +1795,6 @@
           "toggle": false
         }
       },
-      "1623340894821a97a8": {
-        "type": "divider",
-        "settings": {
-          "divider_spacing": 20,
-          "divider_border": false,
-          "css_class": "",
-          "custom_css": ""
-        }
-      },
-      "162334597341f90bdb": {
-        "type": "divider",
-        "settings": {
-          "divider_spacing": 0,
-          "divider_border": true,
-          "css_class": "",
-          "custom_css": ""
-        }
-      },
       "mega-menu-4": {
         "type": "mega-menu-4",
         "blocks": {
@@ -2020,23 +2002,6 @@
           "custom_css": ""
         }
       },
-      "1624997069b4e34bcd": {
-        "type": "blog-posts",
-        "settings": {
-          "title": "Vaping News, Guides and Reviews",
-          "blog_widget_select": "news",
-          "home_page_articles": 3,
-          "blog_tags": false,
-          "blog_author": false,
-          "read_time": true,
-          "blog_date": true,
-          "blog_comment_count": true,
-          "read_more_link": true,
-          "excerpt_display": "full_excerpt",
-          "css_class": "",
-          "custom_css": ""
-        }
-      },
       "contact-custom-template": {
         "type": "contact-custom-template",
         "blocks": {
@@ -2103,9 +2068,6 @@
     },
     "content_for_index": [
       "1489125525070",
-      "162334597341f90bdb",
-      "1623340894821a97a8",
-      "1624997069b4e34bcd",
       "16239170677cd56038"
     ]
   }
