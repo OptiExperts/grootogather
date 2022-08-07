@@ -2083,13 +2083,13 @@
           "16598724823385fac4-2": {
             "type": "collection",
             "settings": {
-              "feature_collection": ""
+              "feature_collection": "category-3"
             }
           },
           "7e782bbe-d791-4661-a53f-d3a3c6ed5974": {
             "type": "collection",
             "settings": {
-              "feature_collection": ""
+              "feature_collection": "category-4"
             }
           }
         },
