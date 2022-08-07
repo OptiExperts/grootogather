@@ -91,8 +91,6 @@
                       </a>
                       <div class="info">
                         <div class="collection-details">
-                          
-                          {{ collection.description }}
                           <span class="title">
                             {% if collection != blank %}
                               {{ collection.title }}
@@ -100,6 +98,7 @@
                               {{ 'homepage.onboarding.collection_title' | t }}
                             {% endif %}
                           </span>
+                          {{ collection.description }}
                         </div>
                         <a
                           href="{{ collection.url }}"
