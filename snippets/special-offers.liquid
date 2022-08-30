@@ -4,7 +4,7 @@ Do NOT change this file.
 Please add following code in theme.liquid almost at the end, BEFORE the line {% render 'special-offers' %}
 
 
-<script type="lazyload2" data-cfasync="false" data-no-instant>
+<script  data-cfasync="false" data-no-instant>
   window.saso_config = {
     product_title_max_length: 40,
     crosssell_never_show_popup: false,
@@ -20,12 +20,12 @@ Please add following code in theme.liquid almost at the end, BEFORE the line {% 
 {% endcomment %}
 
 
-<script type="lazyload2" data-cfasync="false" data-no-instant>window.jQuery ||
+<script data-cfasync="false" data-no-instant>window.jQuery ||
   document.write("<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'>\x3C/script>")
 </script>
 
 
-<script type="lazyload2">
+<script >
   {% assign saso_page_type = '' %}
   window.saso = {
     shop_slug: "{{shop.permanent_domain | remove: '.myshopify.com' }}",
@@ -120,7 +120,7 @@ Please add following code in theme.liquid almost at the end, BEFORE the line {% 
 
 
 {% if template != 'cart' %}
-        <script type="lazyload2" data-cfasync="false">
+        <script  data-cfasync="false">
           jQuery(function(){
             jQuery(document).on('click', "input[name='checkout']:not(.saso-ignore), input[value='Checkout']:not(.saso-ignore), button[name='checkout']:not(.saso-ignore), [href$='checkout']:not(.saso-ignore), button[value='Checkout']:not(.saso-ignore), input[name='goto_pp'], button[name='goto_pp'], input[name='goto_gc'], button[name='goto_gc']", function(e){
               e.preventDefault();

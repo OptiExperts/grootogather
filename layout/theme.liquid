@@ -144,7 +144,7 @@
     {% unless settings.performance == "sport" or template contains "customer" %}
     <script src="{{ 'instantclick.min.js' | asset_url }}" data-no-instant defer></script>
 
-    <script data-no-instant  type="lazyload2">
+    <script data-no-instant>
       window.addEventListener('DOMContentLoaded', function() {
 
         function inIframe() {
@@ -177,7 +177,7 @@
     </script>
     {% endunless %}
 
-    <script type="lazyload2">
+    <script>
       {{ settings.custom_scripts }}
     </script>
 
