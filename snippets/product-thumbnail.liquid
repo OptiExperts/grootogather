@@ -1,3 +1,4 @@
+{%- if product.metafields.inventory.ShappifyHidden == 'true' -%}{%- continue -%}{%- endif -%}
 {%- assign secondaryImage = product.media[1] -%}
 {%- assign collection_handles = product.collections | map: 'handle' -%}
 
@@ -169,13 +170,12 @@
   </a>
 
   <!-- raja -->
-  {% comment %}
   <div class="custom-view-now">
     <a href="{{ product.url }}">
       <span class="custom-title">VIEW NOW</span>
     </a>
   </div>
-{% endcomment %}
+
   {% unless settings.quick_shop_style == 'inline' and settings.quick_shop_enabled %}
     {%
       render 'collection-swatch',

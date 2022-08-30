@@ -94,6 +94,8 @@
       </div>
     {% endif %}
   {% endif %}
+<div class="bold_options" data-product-id="{{ product.id }}"></div>
+
 
   <div class="purchase-details">
     {% if settings.display_product_quantity %}
@@ -116,6 +118,7 @@
         type="{% if settings.cart_action == 'ajax' %}button{% else %}submit{% endif %}"
         name="add"
         class="
+          addtocart
           add_to_cart
           global-button
           {% if show_payment_button %}

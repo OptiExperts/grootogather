@@ -106,7 +106,7 @@
 
       {% if section.settings.show_cart %}
         <div class="cart-container">
-          <a href="{{ routes.cart_url }}" class="{% if section.settings.cart_icon == "cart" %}icon-cart{% else %}icon-bag{% endif %} mini_cart dropdown_link" title="{{ 'layout.general.cart' | t | escape }}" data-no-instant> <span class="cart_count">{{ cart.item_count }}</span></a>
+          <a href="{{ routes.cart_url }}" class="{% if section.settings.cart_icon == "cart" %}icon-cart{% else %}icon-bag{% endif %} mini_cart dropdown_link" title="{{ 'layout.general.cart' | t | escape }}" data-no-instant> <span class="cart_count">{% comment %}{{ cart.item_count }}{% endcomment %}{%- render 'bold-options-hybrid-cart-item-count' with cart -%}</span></a>
         </div>
       {% endif %}
     </div>
@@ -264,7 +264,7 @@
         {% if section.settings.show_cart %}
           <div class="cart-container">
             <a href="{{ routes.cart_url }}" class="{% if section.settings.cart_icon == "cart" %}icon-cart{% else %}icon-bag{% endif %} mini_cart dropdown_link" data-no-instant>
-              <span class="cart_count">{{ cart.item_count }}</span>
+              <span class="cart_count">{% comment %}{{ cart.item_count }}{% endcomment %}{%- render 'bold-options-hybrid-cart-item-count' with cart -%}</span>
             </a>
 
             {% unless settings.cart_action == 'ajax' and template contains 'cart' %}
@@ -289,7 +289,12 @@
                     {%- assign total_saving = 0 -%}
 
                     {% for item in cart.items %}
-                      {% if item.variant.compare_at_price > item.variant.price %}
+                      {%- comment -%}Bold:PO 2.0 - Hybrid Input{%- endcomment -%}
+  {%- if item.properties._boldBuilderId  and item.properties._boldVariantIds == null -%}
+      <input type="hidden" name="updates[]" id="updates_{{- item.key -}}" class="bold_hidden_input cart__product-qty" value="{{- item.quantity -}}" min="0" data-id="{{- item.key -}}">
+      {%- continue -%}
+  {%- endif -%}
+{% if item.variant.compare_at_price > item.variant.price %}
                         {%- assign saving = item.variant.compare_at_price | minus: item.variant.price | times: item.quantity -%}
                         {%- assign total_saving = saving | plus: total_saving -%}
                       {% endif %}
@@ -316,6 +321,9 @@
                               {% endunless %}
 
                               {% if item.properties %}
+<span class="bold_load_cart_item_properties"></span>
+{% comment %}
+ BOLD hidden properties
                                 {% for p in item.properties %}
                                   {% if p.last != blank %}
                                     <div class="line-item">
@@ -323,13 +331,15 @@
                                     </div>
                                   {% endif %}
                                 {% endfor %}
-                              {% endif %}
+                              
+{% endcomment %}
+{% endif %}
                             </a>
                           </div>
 
                           <div class="mini-cart__item-price">
                             {% if item.price > 0 %}
-                              <span class="money {% if item.price < item.variant.compare_at_price or item.line_level_discount_allocations.size > 0 %}sale{% endif %}">
+                              <span class="money {% if item.price < item.variant.compare_at_price or item.line_level_discount_allocations.size > 0 %}sale{% endif %}"><span class="Bold-theme-hook-DO-NOT-DELETE bold_cart_item_price" data-item-key="{{item.key}}" style="display:none !important;"></span>
                                 {%
                                   render 'price-element',
                                   price: item.final_price
@@ -370,7 +380,7 @@
                               <span class="icon-minus"></span>
                             </span>
 
-                            <input type="number" min="0" size="2" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" data-cart-quantity-input="mini-cart" {% if settings.limit_quantity and item.variant.inventory_management != blank and item.variant.inventory_quantity > 0 and item.variant.inventory_policy == "deny" %}max="{{ item.variant.inventory_quantity }}"{% endif %}/>
+                            <input type="number" min="0" size="2" class="quantity" name="updates[]" data-id="{{ item.key }}" id="updates_{{ item.id }}" value="{{ item.quantity }}" data-cart-quantity-input="mini-cart" {% if settings.limit_quantity and item.variant.inventory_management != blank and item.variant.inventory_quantity > 0 and item.variant.inventory_policy == "deny" %}max="{{ item.variant.inventory_quantity }}"{% endif %}/>
 
                             <span class="ss-icon product-plus js-change-quantity" data-func="plus">
                               <span class="icon-plus"></span>
@@ -403,7 +413,7 @@
 
                     <li class="cart_subtotal js-cart_subtotal">
                       <span class="right">
-                        <span class="money">
+                        <span class="money"><span class="Bold-theme-hook-DO-NOT-DELETE bold_cart_total" style="display:none !important;"></span>
                           {%
                             render 'price-element',
                             price: cart.total_price

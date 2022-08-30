@@ -877,6 +877,10 @@ window.searchAutocomplete = {
     if (results && results.length > 0) {
       $.each(results, function(index, result) {
 
+        if(result.type == "OPTIONS_HIDDEN_PRODUCT"){
+          return;
+        }
+
         var link = $('<a tabindex="0"></a>').attr('href', result.url);
         if (Shopify.routes.root_url !== '/') {
           link = $('<a tabindex="0"></a>').attr('href', Shopify.routes.root_url + result.url);

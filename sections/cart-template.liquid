@@ -35,7 +35,12 @@
             {%- assign total_saving = 0 -%}
 
             {% for item in cart.items %}
-              {% if item.variant.compare_at_price > item.variant.price %}
+              {%- comment -%}Bold:PO 2.0 - Hybrid Input{%- endcomment -%}
+  {%- if item.properties._boldBuilderId  and item.properties._boldVariantIds == null -%}
+      <input type="hidden" name="updates[]" id="updates_{{- item.key -}}" class="bold_hidden_input cart__product-qty" value="{{- item.quantity -}}" min="0" data-id="{{- item.key -}}">
+      {%- continue -%}
+  {%- endif -%}
+{% if item.variant.compare_at_price > item.variant.price %}
                 {%- assign saving = item.variant.compare_at_price | minus: item.variant.price | times: item.quantity -%}
                 {%- assign total_saving = saving | plus: total_saving -%}
               {% endif %}
@@ -69,47 +74,29 @@
                     </p>
                   {% endunless %}
 
-                  {% if item.properties %}
-                    <p>
-                      {%- comment -%}{% for p in item.properties %}
-                        {% unless p.last == blank %}
+              <span class="Bold-theme-hook-DO-NOT-DELETE bold_cart_item_properties" style="display:none !important;"></span>
+               {% assign propertySize = item.properties | size %}
+              {% if propertySize > 0 %}
+                  {% for p in item.properties %}
+                      {% assign first_character_in_key = p.first | truncate: 1, '' %}
+                      {% unless p.last == blank or first_character_in_key == '_' %}
+                        <p style="margin-bottom:0px !important;">
+                          {{ p.first }}:
                           {% if p.last contains '/uploads/' %}
-                            <div>
-                              {{ p.first }}: <a class="lightbox" href="{{ p.last }}">{{ 'cart.general.uploaded_file' | t }}</a>
-                            </div>
+                             <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
                           {% else %}
-
-                          <div>
-                            {{ p.first }}: {{ p.last }}
-                          </div>
-                        {% endif %}
+                              {{ p.last }}
+                          {% endif %}
                       {% endunless %}
-                    {% endfor %}{%- endcomment -%}{%- for p in item.properties -%}
-            {%- unless p.last == blank -%}
-              <li class="product-details__item product-details__item--property{%if property_size == 0%} hide{% endif %}" data-cart-item-property>
-                <span class="product-details__item-label" data-cart-item-property-name>{{ p.first }}: </span>
-
-                {%- comment -%}
-                  Check if there was an uploaded file associated
-                {%- endcomment -%}
-                <span data-cart-item-property-value>
-                  {%- if p.last contains "uploads" -%}
-                    <a href="{{ p.last }}">Uploaded File</a>
-                  {%- else -%}
-                    {{ p.last }}
-                  {%- endif -%}
-                </span>
-              </li>
-            {%- endunless -%}
-          {%- endfor -%}
-            <button type="button" class="edit_cart_option btn btn--primary button" data-product_id="{{item.product_id}}" data-key="{{item.key}}" data-variant_id="{{item.variant_id}}" data-quantity="{{item.quantity}}">Edit Options</button>
-                  </p>
-                {% endif %}
+                      </p>
+                  {% endfor %}
+              {% endif %}
+              <div class="bold_edit_in_cart"></div>
 
                 <p class="modal_price">
                   {% if item.price > 0 %}
                     <span class="money {% if item.price < item.variant.compare_at_price or item.line_level_discount_allocations.size > 0 %}sale{% endif %}">
-                      
+                      <span class="Bold-theme-hook-DO-NOT-DELETE bold_cart_item_price" data-item-key="{{item.key}}" style="display:none !important;"></span>
 <span class="saso-cart-item-price" data-key="{{item.key}}">{%
                         render 'price-element',
                         price: item.final_price
@@ -158,7 +145,7 @@
                     <span class="icon-minus"></span>
                   </span>
 
-                  <input type="number" min="0" size="2" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" data-cart-quantity-input="cart-template" {% if settings.limit_quantity and item.variant.inventory_management != blank and item.variant.inventory_quantity > 0 and item.variant.inventory_policy == "deny" %}max="{{ item.variant.inventory_quantity }}"{% endif %} />
+                  <input type="number" min="0" size="2" class="quantity" name="updates[]" data-id="{{ item.key }}" id="updates_{{ item.id }}" value="{{ item.quantity }}" data-cart-quantity-input="cart-template" {% if settings.limit_quantity and item.variant.inventory_management != blank and item.variant.inventory_quantity > 0 and item.variant.inventory_policy == "deny" %}max="{{ item.variant.inventory_quantity }}"{% endif %} />
 
                   <span class="ss-icon product-plus js-change-quantity" data-func="plus">
                     <span class="icon-plus"></span>
@@ -170,7 +157,7 @@
 
                   {% if item.line_level_discount_allocations.size > 0 %}
                     <span class="">
-                      
+                      <span class="Bold-theme-hook-DO-NOT-DELETE bold_cart_item_total" data-item-key="{{item.key}}" style="display:none !important;"></span>
 <span class="saso-cart-item-line-price" data-key="{{item.key}}">{%
                         render 'price-element',
                         price: item.final_line_price
@@ -178,7 +165,7 @@
 
                     </span>
                   {% endif %}
-
+<span class="Bold-theme-hook-DO-NOT-DELETE bold_cart_item_total" data-item-key="{{item.key}}" style="display:none !important;"></span>
                   <span class="money {% if item.line_level_discount_allocations.size > 0 %}was_price{% endif %}">
                     {%
                       render 'price-element',
@@ -215,7 +202,7 @@
             <p class="cart_subtotal js-cart_subtotal">
               <span class="right">
                 <span class="">
-                  
+                  <span class="Bold-theme-hook-DO-NOT-DELETE bold_cart_total" style="display:none !important;"></span>
 <span class="saso-cart-original-total">{%
                     render 'price-element',
                     price: cart.total_price
@@ -318,6 +305,14 @@
     </div>
   {% endfor %}
 </div>
+
+<script>
+window.addEventListener('load',function(){
+  if(typeof BOLD === 'object' && BOLD.common && BOLD.common.eventEmitter && typeof BOLD.common.eventEmitter.emit === 'function') {
+    BOLD.common.eventEmitter.emit("BOLD_COMMON_cart_loaded");
+  }
+}); 
+</script>
 
 {% schema %}
 {

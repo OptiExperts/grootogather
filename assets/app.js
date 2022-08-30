@@ -538,6 +538,13 @@ $(() => {
   }
 
   function refreshCart(cart) {
+
+if(typeof window.BOLD !== 'undefined'
+       && typeof window.BOLD.common !== 'undefined'
+       && typeof window.BOLD.common.cartDoctor !== 'undefined') {
+      cart = window.BOLD.common.cartDoctor.fix(cart);
+    }
+    
     $('.cart_count').empty();
     const $cartBtn = $('.cart_count');
     const value = $cartBtn.text() || '0';
@@ -704,6 +711,11 @@ $(() => {
     if (window.Currency.show_multiple_currencies) {
       window.currencyConverter.convertCurrencies();
     }
+
+    if(typeof BOLD === 'object' && BOLD.common && BOLD.common.eventEmitter && typeof BOLD.common.eventEmitter.emit === 'function') {
+      BOLD.common.eventEmitter.emit("BOLD_COMMON_cart_loaded");
+    }
+    
   }
 
   $('body').on('change', '[data-cart-quantity-input]', function () {
@@ -755,12 +767,20 @@ $(() => {
         $addToCartForm.submit();
       }
 
+      var formdata = false;
+      if(window.FormData){
+        formdata = new FormData($addToCartForm[0])
+      }
+
       $.ajax({
         url: '/cart/add.js',
         dataType: 'json',
         cache: false,
         type: 'post',
-        data: $addToCartForm.serialize(),
+        // data: $addToCartForm.serialize(),
+        data: formdata ? formdata : $addToCartForm.serialize(),
+        contentType : false,
+        processData : false,
         beforeSend() {
           $addToCartBtn.attr('disabled', 'disabled').addClass('disabled');
           $addToCartBtn.find('span').removeClass('fadeInDown').addClass('animated zoomOut');

@@ -1,24 +1,10 @@
+
 {% capture content %}
 <!DOCTYPE html>
 <html lang="{{ shop.locale }}">
-  <head>{% render 'yoast-seo' %}
-    {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
-    {%- if disabled_by_yoast_seo -%}
-    {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
-    {%- if disabled_by_yoast_seo -%}
-    <meta name="google-site-verification" content="KJ7l1p2otsNXpEOmRdchaqv1BZG_saYi5gAbNee2YbY" />
-    <!-- disabled_by_yoast_seo -->
-    {%- endif -%}
-    <!-- disabled_by_yoast_seo -->
-    {%- endif -%}
+  <head>
 
-    <link rel="preload" href="https://fonts.shopifycdn.com/roboto/roboto_n4.da808834c2315f31dd3910e2ae6b1a895d7f73f5.woff2?h1=dGhldmFwZWhvdXNlLmNvLnVr&hmac=a597136fa9073a5b11f373442bbe40c54063c6309a8ea148da1a4db6024185bb" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://fonts.shopifycdn.com/oswald/oswald_n3.bff4a8cab6f8be4b0b6d9de4e53c84f45f143640.woff2?h1=dGhldmFwZWhvdXNlLmNvLnVr&hmac=322bb8942f34be2943821eb8842a6c09145cab6fa2d264c982964bd1881dc56a" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://fonts.shopifycdn.com/oswald/oswald_n7.f71e68b857a7b8128a7629452b9c6bf9468356a7.woff2?h1=dGhldmFwZWhvdXNlLmNvLnVr&hmac=d5cf745174222ed7a0e4163e87a8b740054661620d2762f38db27173fa197b2f" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://fonts.shopifycdn.com/roboto/roboto_n3.fcf1a8ca0d134f200393562dbdc9f5836276782d.woff2?h1=dGhldmFwZWhvdXNlLmNvLnVr&hmac=febb4f1bc689f5186374977b119b00887568b2156039c5e045b278b7d0ea1483" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://cdn.shopify.com/s/files/1/0574/2680/4901/t/9/assets/turbo.woff?v=15096657723668424478" as="font" type="font/woff" crossorigin>
-    <link rel="preload" href="https://fonts.shopifycdn.com/roboto/roboto_n7.51ede27d5b58491d9cf07ad184108da52fef80b4.woff2?h1=dGhldmFwZWhvdXNlLmNvLnVr&hmac=7bdf0a499471da58db14173c99a849ea2fd6cb605e23fffecb50aa52d0a4a9cd" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://fonts.shopifycdn.com/oswald/oswald_n4.a5ee385bde39969d807f7f1297bf51d73fbf3c1e.woff2?h1=dGhldmFwZWhvdXNlLmNvLnVr&hmac=e05e725fd4a8e0b5cb7f5e6a7cbd0588c78c29881df37f9ecad836cc9d23c9fd" as="font" type="font/woff2" crossorigin>
+
 
     <meta charset="utf-8">
     <meta http-equiv="cleartype" content="on">
@@ -38,30 +24,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="{{ settings.shop_bg_color }}">
 
-    {% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %}{% endif %}
-    {%- comment -%}Auto-disabled. Yoast plugin is taking care of SEO output.{%- endcomment -%}
-    {%- if disabled_by_yoast_seo -%}
-    {%- comment -%}Auto-disabled. Yoast plugin is taking care of SEO output.{%- endcomment -%}
-    {%- if disabled_by_yoast_seo -%}
-    <title>
-      {% if template contains "index" %}{{ page_title }}{% else %}{{ page_title }}{% if current_tags %} {{ 'general.meta.tagged_html' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} {{ 'general.meta.page' | t: page_number: current_page }}{% endif %}{% unless page_title contains shop.name %}{% endunless %}{% endif %}
-    </title>
-    <!-- disabled_by_yoast_seo -->
-    {%- endif -%}
-    <!-- disabled_by_yoast_seo -->
-    {%- endif -%}
-
-    {% if page_description %}
-    {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
-    {%- if disabled_by_yoast_seo -%}
-    {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
-    {%- if disabled_by_yoast_seo -%}
-    <meta name="description" content="{% if template contains 'search' %} {{ page_title }} {% else %}{{ page_description | escape }}{% if current_tags %} {{ 'general.meta.tagged_html' | t: tags: meta_tags | escape }}.{% endif %}{% if current_page != 1 %} {{ 'general.meta.page' | t: page_number: current_page }}.{% endif %}{% endif %}"/>
-    <!-- disabled_by_yoast_seo -->
-    {%- endif -%}
-    <!-- disabled_by_yoast_seo -->
-    {%- endif -%}
-    {% endif %}
 
     <!-- Preconnect Domains -->
     <link rel="preconnect" href="https://fonts.shopifycdn.com" />
@@ -84,22 +46,13 @@
 
 
     <!-- Stylesheet for Fancybox library -->
-    <link rel="stylesheet" data-href="{{ 'fancybox.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'fancybox.css' | asset_url }}">
     <!-- Stylesheets for Turbo -->
     <link rel="stylesheet" href="{{ 'styles.css' | asset_url }}">
 
 
 
 
-    {% if template contains 'index' %}
-    {%- render '__home-css' -%}
-    {% elsif template contains 'product' %}
-    {%- render '__product-css' -%}
-    {% elsif template contains 'collection' %}
-    {%- render '__collection-css' -%}
-    {% else %}
-    {{ 'styles.css' | asset_url | stylesheet_tag }}
-    {% endif %}
 
     <script>
       window.lazySizesConfig = window.lazySizesConfig || {};
@@ -128,29 +81,20 @@
     {% else %}
     <link rel="shortcut icon" type="image/x-icon" href="{{ 'favicon.png' | asset_url }}">
     {% endif %}
-    {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
-    {%- if disabled_by_yoast_seo -%}
-    {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
-    {%- if disabled_by_yoast_seo -%}
-    <link rel="canonical" href="{{ canonical_url }}"/>
-    <!-- disabled_by_yoast_seo -->
-    {%- endif -%}
-    <!-- disabled_by_yoast_seo -->
-    {%- endif -%}
 
     {% if template contains 'customer' %}
-    <script  src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
-    <script  src="{{ 'customer_area.js' | shopify_asset_url }}" defer></script>
+    <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
+    <script src="{{ 'customer_area.js' | shopify_asset_url }}" defer></script>
     {% endif %}
 
-    <script  src="{{ 'jquery.min.js' | asset_url }}" defer></script>
+    <script src="{{ 'jquery.min.js' | asset_url }}" defer></script>
 
     {% if settings.show_multiple_currencies or settings.show_shipping_calculator %}
-    <script  src="/services/javascripts/currencies.js" data-no-instant></script>
+    <script src="/services/javascripts/currencies.js" data-no-instant></script>
     {% endif %}
 
     {% if settings.show_multiple_currencies or shop.enabled_currencies.size > 1 %}
-    <script  src="{{ 'currencies.js' | asset_url }}" defer></script>
+    <script src="{{ 'currencies.js' | asset_url }}" defer></script>
     {% endif %}
 
     {% comment %}Inject theme-object begin{% endcomment %}
@@ -191,16 +135,16 @@
       {% render 'js-variables' %}
     </script>
 
-    <script  src="{{ 'vendors.js' | asset_url }}" defer></script>
-    <script  src="{{ 'sections.js' | asset_url }}" defer></script>
-    <script  src="{{ 'utilities.js' | asset_url }}" defer></script>
-    <script  src="{{ 'app.js' | asset_url }}" defer></script>
+    <script src="{{ 'vendors.js' | asset_url }}" defer></script>
+    <script src="{{ 'sections.js' | asset_url }}" defer></script>
+    <script src="{{ 'utilities.js' | asset_url }}" defer></script>
+    <script src="{{ 'app.js' | asset_url }}" defer></script>
 
 
     {% unless settings.performance == "sport" or template contains "customer" %}
-    <script  src="{{ 'instantclick.min.js' | asset_url }}" data-no-instant defer></script>
+    <script src="{{ 'instantclick.min.js' | asset_url }}" data-no-instant defer></script>
 
-    <script data-no-instant >
+    <script data-no-instant  type="lazyload2">
       window.addEventListener('DOMContentLoaded', function() {
 
         function inIframe() {
@@ -233,14 +177,21 @@
     </script>
     {% endunless %}
 
-    <script>
+    <script type="lazyload2">
       {{ settings.custom_scripts }}
     </script>
 
+
     {{ content_for_header }}
-  
+
+
+
+
+
+
     {% render 'social-meta-info' %}
-  </head>
+
+ </head>
 
   {% if template contains "index" %}
   {% assign feature_image = true %}
@@ -349,6 +300,7 @@
     {% include 'appikon-discounts' %}
     {% endif %}
     {% render 'special-offers' %}
+
   </body>
 </html>
 {% endcapture %}
